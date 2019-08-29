@@ -48,7 +48,7 @@ var NewFile = Vue.component('NewFile', {
                 <h1>Nueva Convocatoria</h1>
                 <div class="file-container new-file-container">
                     <form class="form-file" @submit.prevent="processform" >
-                        <input class="file-input" type="file" v-on:change="onFileChange(event)">
+                        <input class="file-input" type="file" v-on:change="onFileChange(event)" accept="application/pdf">
                         <p id="file-info">Arrastra tu archivo o haz click aquí.</p>
                         <input type="text" placeholder="Nombre" v-model="Grant_PDF_Name" @input="handleName">
                         <input type="text" hidden>
