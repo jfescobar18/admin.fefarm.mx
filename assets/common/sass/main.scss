@@ -1,5 +1,64 @@
+@import 'bootstrap';
 @import 'fonts';
-@import 'login';
+@import 'variables';
 @import 'navbar';
-@import 'index';
-@import 'files';
+@import 'loader';
+.scrollcontent {
+    margin-left: 64px;
+}
+
+.title {
+    margin-bottom: 64px;
+}
+
+.f-right {
+    float: right;
+}
+
+.w20 {
+    width: 20%;
+}
+
+.w100 {
+    width: 100% !important;
+}
+
+.btn-tertiary {
+    color: #555;
+    padding: 0;
+    line-height: 40px;
+    width: 300px;
+    margin: auto;
+    display: block;
+    border: 2px solid #555;
+    &:hover,
+    &:focus {
+        color: lighten(#555, 20%);
+        border-color: lighten(#555, 20%);
+    }
+}
+
+.input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    +.js-labelFile {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 0 10px;
+        cursor: pointer;
+        .icon:before {
+            content: "\f093";
+        }
+        &.has-file {
+            .icon:before {
+                content: "\f00c";
+                color: #5AAC7B;
+            }
+        }
+    }
+}

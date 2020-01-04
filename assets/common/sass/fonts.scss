@@ -1,20 +1,28 @@
 @font-face {
-    font-family: 'Avenir';
-    src: url('../fonts/AvenirLTStd-Roman.woff2') format('woff2'), url('../fonts/AvenirLTStd-Roman.woff') format('woff');
+    font-family: 'Raleway';
+    src: url('../fonts/Raleway-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Avenir';
-    src: url('../fonts/AvenirLTStd-LightOblique.woff2') format('woff2'), url('../fonts/AvenirLTStd-LightOblique.woff') format('woff');
-    font-weight: 300;
+    font-family: 'Raleway';
+    src: url('../fonts/Raleway-Bold.ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Bold.ttf');
+    font-weight: bold;
     font-style: italic;
 }
 
 @font-face {
-    font-family: 'Avenir';
-    src: url('../fonts/AvenirLTStd-Black.woff2') format('woff2'), url('../fonts/AvenirLTStd-Black.woff') format('woff');
-    font-weight: 900;
+    font-family: 'slick';
+    font-weight: normal;
     font-style: normal;
+    src: url('../ fonts/slick.eot');
+    src: url('../fonts/slick.eot?#iefix') format('embedded-opentype'), url('../fonts/slick.woff') format('woff'), url('../fonts/slick.ttf') format('truetype'), url('../fonts/slick.svg#slick') format('svg');
 }

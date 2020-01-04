@@ -1,62 +1,25 @@
-var Navbar = Vue.component('Navbar', {
-    methods: {
-        IsLogged: function () {
-            if (localStorage.getItem('IsLogged') === null) {
-                window.location.href = '/';
-            }
-        }
-    },
+var navbar = Vue.component('navbar', {
     template: `
-        <nav class="main-menu">
-            <ul>
-                <li class="">
-                    <router-link to="/Home">
-                        <i class="fa fa-home fa-2x"></i>
-                        <span class="nav-text">
-                            Inicio
-                        </span>
-                    </router-link>
-                </li>
-                <li class="">
-                    <router-link to="Files">
-                        <i class="far fa-file-pdf fa-2x"></i>
-                        <span class="nav-text">
-                            Convocatorias
-                        </span>
-                    </router-link>
-                </li>
-                <li class="">
-                    <router-link to="#">
-                        <i class="fas fa-cogs fa-2x"></i>
-                        <span class="nav-text">
-                            Section
-                        </span>
-                    </router-link>
-                </li>
-                <li class="">
-                    <router-link to="#">
-                        <i class="fas fa-cogs fa-2x"></i>
-                        <span class="nav-text">
-                            Section
-                        </span>
-                    </router-link>
-                </li>
-            </ul>
-            <ul class="logout">
-                <li>
-                    <router-link to="#">
-                        <i class="fa fa-power-off fa-2x"></i>
-                        <span class="nav-text">
-                            Logout
-                        </span>
-                    </router-link>
-                </li>
-            </ul>
-        </nav>
-    `,
-    mounted() {
-        this.IsLogged();
-    }
-})
+        <div id="nav" class="nav">
+            <div class="icon">
+                <ul>
+                    <li><router-link to="/"><i class="fa fa-home"></i></router-link></li>
+                    <li><router-link to="/Reglamento"><i class="fas fa-file-pdf"></i></router-link></li>
+                    <li><router-link to="/Evidencias"><i class="fas fa-file-pdf"></i></router-link></li>
+                    <li><router-link to="/Requisitos"><i class="fas fa-file-pdf"></i></router-link></li>
+            
+                </ul>
+            </div>
+            <div class="text">
+                <ul>
+                    <li><router-link to="/">Home</router-link></li>
+                    <li><router-link to="/Reglamento">Reglamento</router-link></li>
+                    <li><router-link to="/Evidencias">Evidencias</router-link></li>
+                    <li><router-link to="/Requisitos">Requisitos</router-link></li>
+                </ul>
+            </div>
+        </div>
+    `
+});
 
-export default Navbar;
+export default navbar;
