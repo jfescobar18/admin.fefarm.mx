@@ -1,14 +1,26 @@
 import navbar from '../components/navbar.js'
 import home from '../components/home.js'
-import Reglamento from '../components/Reglamento.js'
-import Evidencias from '../components/Evidencias.js'
-import Requisitos from '../components/Requisitos.js'
+import Solicitudes from '../components/solicitudes.js'
+import Aplicaciones from '../components/aplicaciones.js'
+import Reglamento from '../components/reglamento.js'
+import Evidencias from '../components/evidencias.js'
+import Requisitos from '../components/requisitos.js'
 
 const routes = [
     {
         path: '/',
         name: 'home',
         component: home
+    },
+    {
+        path: '/Aplicaciones',
+        name: 'Aplicaciones',
+        component: Aplicaciones
+    },
+    {
+        path: '/Solicitudes',
+        name: 'Solicitudes',
+        component: Solicitudes
     },
     {
         path: '/Reglamento',

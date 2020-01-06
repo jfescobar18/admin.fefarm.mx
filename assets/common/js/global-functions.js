@@ -21,6 +21,21 @@ function animInput() {
     });
 }
 
+function formatDate(date) {
+    var monthNames = [
+        "ENE", "FEB", "MAR",
+        "ABR", "MAY", "JUN", "JUL",
+        "AGO", "SEP", "OCT",
+        "NOV", "DIC"
+    ];
+
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    return day + '-' + monthNames[monthIndex] + '-' + year;
+}
+
 function showLoader() {
     var loader = document.getElementById('loader');
     loader.className += ' displayed';
