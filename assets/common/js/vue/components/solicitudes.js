@@ -22,7 +22,11 @@ var Solicitudes = Vue.component('Solicitudes', {
                 id: 0,
                 label: '',
                 type: 0,
-                values: null,
+                values: {
+                    string: '',
+                    array: []
+                },
+                answers: [],
                 required: false,
                 size: 12,
             }
@@ -121,12 +125,16 @@ var Solicitudes = Vue.component('Solicitudes', {
         saveField: function () {
             if (this.InputModel.id === 0) {
                 this.InputModel.id = Math.max.apply(null, this.RequestTemplate.length > 0 ? this.RequestTemplate.map(x => x.id) : [0]) + 1;
-                this.InputModel.values = this.InputModel.values !== null ? this.InputModel.values.split(',') : null;
+                this.parseInputModelValues();
+
                 this.RequestTemplate.push(this.InputModel);
             }
             else {
-                let filteredTemplate = this.RequestTemplate.filter(x => x.id !== this.InputModel.id)[0];
-                this.RequestTemplate = filteredTemplate !== undefined ? filteredTemplate : [];
+                let InputModel = this.RequestTemplate.filter(x => x.id !== this.InputModel.id)[0];
+
+                this.InputModel = InputModel !== undefined ? InputModel : [];
+                this.parseInputModelValues();
+
                 this.RequestTemplate.push(this.InputModel);
             }
 
@@ -137,6 +145,16 @@ var Solicitudes = Vue.component('Solicitudes', {
         },
         deleteField: function (id) {
             this.RequestTemplate = this.RequestTemplate.filter(x => x.id !== id);
+        },
+        parseInputModelValues: function () {
+            this.InputModel.values.array = this.InputModel.values.string.split(',');
+            
+            if (this.InputModel.type === 4) {
+                this.InputModel.answers = [];
+                for (let i = 0; i < this.InputModel.values.array.length; i++) {
+                    this.InputModel.answers.push(false);
+                }
+            }
         },
         resetProps: function () {
             this.cleanRequestModel();
@@ -162,7 +180,11 @@ var Solicitudes = Vue.component('Solicitudes', {
                 id: 0,
                 label: '',
                 type: 0,
-                values: null,
+                values: {
+                    string: '',
+                    array: []
+                },
+                answers: [],
                 required: false,
                 size: 12,
             };
@@ -309,7 +331,7 @@ var Solicitudes = Vue.component('Solicitudes', {
                                                                     <span class="custom-popover above">Las opciones son los diferentes valores que se pueden escoger y van separadas por comas</span>
                                                                 </span>
                                                             </label>
-                                                            <input type="text" class="form-control" placeholder="" id="field-values" v-model="InputModel.values">
+                                                            <input type="text" class="form-control" placeholder="" id="field-values" v-model="InputModel.values.string">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
