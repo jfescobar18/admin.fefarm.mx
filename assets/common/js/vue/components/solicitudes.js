@@ -130,25 +130,26 @@ var Solicitudes = Vue.component('Solicitudes', {
                 this.RequestTemplate.push(this.InputModel);
             }
             else {
-                let InputModel = this.RequestTemplate.filter(x => x.id !== this.InputModel.id)[0];
-
-                this.InputModel = InputModel !== undefined ? InputModel : [];
+                this.RequestTemplate = this.RequestTemplate.filter(x => x.id !== this.InputModel.id)[0] || [];
                 this.parseInputModelValues();
 
                 this.RequestTemplate.push(this.InputModel);
             }
 
+            console.log(this.RequestTemplate);
             this.cleanInputModel();
         },
         editField: function (id) {
             this.InputModel = this.RequestTemplate.filter(x => x.id === id)[0];
+            console.log(this.InputModel);
+
         },
         deleteField: function (id) {
             this.RequestTemplate = this.RequestTemplate.filter(x => x.id !== id);
         },
         parseInputModelValues: function () {
             this.InputModel.values.array = this.InputModel.values.string.split(',');
-            
+
             if (this.InputModel.type === 4) {
                 this.InputModel.answers = [];
                 for (let i = 0; i < this.InputModel.values.array.length; i++) {
@@ -280,14 +281,14 @@ var Solicitudes = Vue.component('Solicitudes', {
                                                             <input v-if="input.type === '2'" type="date" class="form-control" placeholder="" v-bind:id="'input-id-' + input.id">
                                                             
                                                             <select v-if="input.type === '3'" v-bind:id="'input-id-' + input.id" class="form-control">
-                                                                <option v-for="(option, index) in input.values" value="option">{{ option }}</option>
+                                                                <option v-for="(option, index) in input.values.array" value="option">{{ option }}</option>
                                                             </select>
                                                             
                                                             <template v-if="input.type === '4'">
                                                                 <br />
-                                                                <template v-for="(option, index) in input.values">
+                                                                <template v-for="(option, index) in input.values.array">
                                                                 <input type="checkbox" value="option" v-bind:id="'checkbox-group-option-' + index"> {{ option }}
-                                                                <br v-if="index < input.values.length - 1" />
+                                                                <br v-if="index < input.values.array.length - 1" />
                                                                 </template>
                                                             </template>
                                                             
