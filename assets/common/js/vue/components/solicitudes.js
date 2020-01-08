@@ -38,7 +38,7 @@ var Solicitudes = Vue.component('Solicitudes', {
         },
         loadRequests: function () {
             showLoader();
-            this.$http.get(APIUrl() + 'Requests/GetRequests', {
+            this.$http.get(APIUrl() + 'Requests/GetRequestsTemplate', {
                 headers: {
                     APIKey: config.APIKey
                 }
@@ -64,7 +64,7 @@ var Solicitudes = Vue.component('Solicitudes', {
         },
         saveRequest: function () {
             showLoader();
-            this.$http.post(APIUrl() + `Requests/${this.RequestModel.Request_Id === 0 ? 'AddRequest' : 'UpdateRequest'}`, {
+            this.$http.post(APIUrl() + `Requests/${this.RequestModel.Request_Id === 0 ? 'AddRequestTemplate' : 'UpdateRequestTemplate'}`, {
                 Request_Id: this.RequestModel.Request_Id,
                 Request_Name: this.RequestModel.Request_Name,
                 Request_JSON_Body: JSON.stringify(this.RequestTemplate),
@@ -103,7 +103,7 @@ var Solicitudes = Vue.component('Solicitudes', {
         },
         deleteRequest: function (Request_Id) {
             showLoader();
-            this.$http.post(APIUrl() + 'Requests/DeleteRequest', {
+            this.$http.post(APIUrl() + 'Requests/DeleteRequestTemplate', {
                 Request_Id: Request_Id
             }, {
                 headers: {
@@ -123,26 +123,17 @@ var Solicitudes = Vue.component('Solicitudes', {
             );
         },
         saveField: function () {
+            this.parseInputModelValues();
+
             if (this.InputModel.id === 0) {
                 this.InputModel.id = Math.max.apply(null, this.RequestTemplate.length > 0 ? this.RequestTemplate.map(x => x.id) : [0]) + 1;
-                this.parseInputModelValues();
-
-                this.RequestTemplate.push(this.InputModel);
-            }
-            else {
-                this.RequestTemplate = this.RequestTemplate.filter(x => x.id !== this.InputModel.id)[0] || [];
-                this.parseInputModelValues();
-
                 this.RequestTemplate.push(this.InputModel);
             }
 
-            console.log(this.RequestTemplate);
             this.cleanInputModel();
         },
         editField: function (id) {
             this.InputModel = this.RequestTemplate.filter(x => x.id === id)[0];
-            console.log(this.InputModel);
-
         },
         deleteField: function (id) {
             this.RequestTemplate = this.RequestTemplate.filter(x => x.id !== id);
@@ -150,11 +141,17 @@ var Solicitudes = Vue.component('Solicitudes', {
         parseInputModelValues: function () {
             this.InputModel.values.array = this.InputModel.values.string.split(',');
 
-            if (this.InputModel.type === 4) {
+            if (this.InputModel.type === '4') {
                 this.InputModel.answers = [];
                 for (let i = 0; i < this.InputModel.values.array.length; i++) {
                     this.InputModel.answers.push(false);
                 }
+            }
+            else if (this.InputModel.type === '5') {
+                this.InputModel.answers.push(false);
+            }
+            else {
+                this.InputModel.answers.push('');
             }
         },
         resetProps: function () {
@@ -271,34 +268,32 @@ var Solicitudes = Vue.component('Solicitudes', {
                                             <label for="company">Formulario</label>
                                             
                                             <div class="row">
-                                                <div v-for="input in RequestTemplate">
-                                                    <div v-bind:class="'col-md-' + input.size">
-                                                        <div class="form-group">
-                                                            <label v-bind:for="'input-id-' + input.id">{{input.label}}</label>
-                                                            
-                                                            <input v-if="input.type === '1'" type="text" class="form-control" placeholder="" v-bind:id="'input-id-' + input.id">
-                                                            
-                                                            <input v-if="input.type === '2'" type="date" class="form-control" placeholder="" v-bind:id="'input-id-' + input.id">
-                                                            
-                                                            <select v-if="input.type === '3'" v-bind:id="'input-id-' + input.id" class="form-control">
-                                                                <option v-for="(option, index) in input.values.array" value="option">{{ option }}</option>
-                                                            </select>
-                                                            
-                                                            <template v-if="input.type === '4'">
-                                                                <br />
-                                                                <template v-for="(option, index) in input.values.array">
+                                                <div v-for="input in RequestTemplate" v-bind:class="'col-md-' + input.size">
+                                                    <div class="form-group">
+                                                        <label v-bind:for="'input-id-' + input.id">{{input.label}}</label>
+                                                        
+                                                        <input v-if="input.type === '1'" type="text" class="form-control" placeholder="" v-bind:id="'input-id-' + input.id">
+                                                        
+                                                        <input v-if="input.type === '2'" type="date" class="form-control" placeholder="" v-bind:id="'input-id-' + input.id">
+                                                        
+                                                        <select v-if="input.type === '3'" v-bind:id="'input-id-' + input.id" class="form-control">
+                                                            <option v-for="(option, index) in input.values.array" v-bind:value="index + 1">{{ option }}</option>
+                                                        </select>
+                                                        
+                                                        <template v-if="input.type === '4'">
+                                                            <br />
+                                                            <template v-for="(option, index) in input.values.array">
                                                                 <input type="checkbox" value="option" v-bind:id="'checkbox-group-option-' + index"> {{ option }}
                                                                 <br v-if="index < input.values.array.length - 1" />
-                                                                </template>
                                                             </template>
-                                                            
-                                                            <input v-if="input.type === '5'" type="checkbox" v-bind:id="'input-id-' + input.id">
-                                                            
-                                                            <textarea v-if="input.type === '6'" class="form-control" v-bind:id="'input-id-' + input.id" rows="10"></textarea>
-                                                            <div class="mt-5">
-                                                                <button type="button" class="btn btn-sm btn-info" v-on:click="editField(input.id)"><i class="fas fa-edit"></i></button>
-                                                                <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteField(input.id)"><i class="fas fa-times"></i></button>
-                                                            </div>
+                                                        </template>
+                                                        
+                                                        <input v-if="input.type === '5'" type="checkbox" v-bind:id="'input-id-' + input.id">
+                                                        
+                                                        <textarea v-if="input.type === '6'" class="form-control" v-bind:id="'input-id-' + input.id" rows="10"></textarea>
+                                                        <div class="mt-5">
+                                                            <button type="button" class="btn btn-sm btn-info" v-on:click="editField(input.id)"><i class="fas fa-edit"></i></button>
+                                                            <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteField(input.id)"><i class="fas fa-times"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
