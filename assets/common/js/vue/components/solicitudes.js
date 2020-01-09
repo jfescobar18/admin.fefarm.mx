@@ -15,7 +15,21 @@ var Solicitudes = Vue.component('Solicitudes', {
             }
         },
         RequestTemplate: {
-            default: []
+            default: [
+                {
+                    "id": 1,
+                    "label":
+                        "Tipo de solicitud",
+                    "type": "3",
+                    "values": {
+                        "string": "Beca,Estancia",
+                        "array": ["Beca", "Estancia"]
+                    },
+                    "answers": [""],
+                    "required": false,
+                    "size": "3 mb-6 mt-6"
+                }
+            ]
         },
         InputModel: {
             default: {
@@ -171,7 +185,19 @@ var Solicitudes = Vue.component('Solicitudes', {
             };
         },
         cleanRequestTemplate: function () {
-            this.RequestTemplate = [];
+            this.RequestTemplate = [{
+                "id": 1,
+                "label":
+                    "Tipo de solicitud",
+                "type": "3",
+                "values": {
+                    "string": "Beca,Estancia",
+                    "array": ["Beca", "Estancia"]
+                },
+                "answers": [""],
+                "required": false,
+                "size": "3 mb-6 mt-6"
+            }];
         },
         cleanInputModel: function () {
             this.InputModel = {
