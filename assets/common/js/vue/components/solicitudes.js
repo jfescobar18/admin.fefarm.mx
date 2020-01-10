@@ -17,17 +17,20 @@ var Solicitudes = Vue.component('Solicitudes', {
         RequestTemplate: {
             default: [
                 {
-                    "id": 1,
-                    "label":
-                        "Tipo de solicitud",
-                    "type": "3",
-                    "values": {
-                        "string": "Beca,Estancia",
-                        "array": ["Beca", "Estancia"]
+                    id: 1,
+                    label: 'Tipo de solicitud',
+                    type: '3',
+                    values: {
+                        string: 'Beca,Estancia',
+                        array: ['Beca', 'Estancia']
                     },
-                    "answers": [""],
-                    "required": false,
-                    "size": "3 mb-6 mt-6"
+                    points: {
+                        string: '',
+                        array: []
+                    },
+                    answers: [''],
+                    required: false,
+                    size: '3 mb-6 mt-6'
                 }
             ]
         },
@@ -40,9 +43,13 @@ var Solicitudes = Vue.component('Solicitudes', {
                     string: '',
                     array: []
                 },
+                points: {
+                    string: '',
+                    array: []
+                },
                 answers: [],
                 required: false,
-                size: 12,
+                size: 12
             }
         }
     },
@@ -52,7 +59,7 @@ var Solicitudes = Vue.component('Solicitudes', {
         },
         loadRequests: function () {
             showLoader();
-            this.$http.get(APIUrl() + 'Requests/GetRequestsTemplate', {
+            this.$http.get(APIUrl() + 'Requests/GetRequestTemplates', {
                 headers: {
                     APIKey: config.APIKey
                 }
@@ -154,6 +161,7 @@ var Solicitudes = Vue.component('Solicitudes', {
         },
         parseInputModelValues: function () {
             this.InputModel.values.array = this.InputModel.values.string.split(',');
+            this.InputModel.points.array = this.InputModel.points.string.split(',');
 
             if (this.InputModel.type === '4') {
                 this.InputModel.answers = [];
@@ -186,17 +194,20 @@ var Solicitudes = Vue.component('Solicitudes', {
         },
         cleanRequestTemplate: function () {
             this.RequestTemplate = [{
-                "id": 1,
-                "label":
-                    "Tipo de solicitud",
-                "type": "3",
-                "values": {
-                    "string": "Beca,Estancia",
-                    "array": ["Beca", "Estancia"]
+                id: 1,
+                label: 'Tipo de solicitud',
+                type: '3',
+                values: {
+                    string: 'Beca,Estancia',
+                    array: ['Beca', 'Estancia']
                 },
-                "answers": [""],
-                "required": false,
-                "size": "3 mb-6 mt-6"
+                points: {
+                    string: '',
+                    array: []
+                },
+                answers: [''],
+                required: false,
+                size: '3 mb-6 mt-6'
             }];
         },
         cleanInputModel: function () {
@@ -208,9 +219,13 @@ var Solicitudes = Vue.component('Solicitudes', {
                     string: '',
                     array: []
                 },
+                points: {
+                    string: '',
+                    array: []
+                },
                 answers: [],
                 required: false,
-                size: 12,
+                size: 12
             };
         },
         closeModal: function () {
@@ -296,20 +311,20 @@ var Solicitudes = Vue.component('Solicitudes', {
                                             <div class="row">
                                                 <div v-for="input in RequestTemplate" v-bind:class="'col-md-' + input.size">
                                                     <div class="form-group">
-                                                        <label v-bind:for="'input-id-' + input.id">{{input.label}}</label>
+                                                        <label v-if="input.type !== '7' && input.type !== '8' && input.type !== '9' && input.type !== '10'" v-bind:for="'input-id-' + input.id">{{input.label}}</label>
                                                         
                                                         <input v-if="input.type === '1'" type="text" class="form-control" placeholder="" v-bind:id="'input-id-' + input.id">
                                                         
                                                         <input v-if="input.type === '2'" type="date" class="form-control" placeholder="" v-bind:id="'input-id-' + input.id">
                                                         
                                                         <select v-if="input.type === '3'" v-bind:id="'input-id-' + input.id" class="form-control">
-                                                            <option v-for="(option, index) in input.values.array" v-bind:value="index + 1">{{ option }}</option>
+                                                            <option v-for="(option, index) in input.values.array" v-bind:value="index + 1">{{ option.split(';').join(',') }}</option>
                                                         </select>
                                                         
                                                         <template v-if="input.type === '4'">
                                                             <br />
                                                             <template v-for="(option, index) in input.values.array">
-                                                                <input type="checkbox" value="option" v-bind:id="'checkbox-group-option-' + index"> {{ option }}
+                                                                <input type="checkbox" value="option" v-bind:id="'checkbox-group-option-' + input.id + '-' + index"> {{ option.split(';').join(',') }}
                                                                 <br v-if="index < input.values.array.length - 1" />
                                                             </template>
                                                         </template>
@@ -317,6 +332,15 @@ var Solicitudes = Vue.component('Solicitudes', {
                                                         <input v-if="input.type === '5'" type="checkbox" v-bind:id="'input-id-' + input.id">
                                                         
                                                         <textarea v-if="input.type === '6'" class="form-control" v-bind:id="'input-id-' + input.id" rows="10"></textarea>
+                                                        
+                                                        <h3 v-if="input.type === '7'">{{ input.label }}</h3>
+
+                                                        <h4 v-if="input.type === '8'">{{ input.label }}</h4>
+
+                                                        <small v-if="input.type === '9'">{{ input.label }}</small>
+
+                                                        <p v-if="input.type === '10'">{{ input.label }}</p>
+
                                                         <div class="mt-5">
                                                             <button type="button" class="btn btn-sm btn-info" v-on:click="editField(input.id)"><i class="fas fa-edit"></i></button>
                                                             <button type="button" class="btn btn-sm btn-danger" v-on:click="deleteField(input.id)"><i class="fas fa-times"></i></button>
@@ -327,13 +351,13 @@ var Solicitudes = Vue.component('Solicitudes', {
 
                                             <div class="well col-md-12">
                                                 <div class="row">
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="field-label">Etiqueta</label>
                                                             <input type="text" class="form-control" placeholder="" id="field-label" v-model="InputModel.label">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="field-type">Tipo</label>
                                                             <select id="field-type" class="form-control" v-model="InputModel.type">
@@ -343,20 +367,34 @@ var Solicitudes = Vue.component('Solicitudes', {
                                                                 <option value="4">Opción múltiple</option>
                                                                 <option value="5">Check</option>
                                                                 <option value="6">Texto largo</option>
+                                                                <option value="7">Título</option>
+                                                                <option value="8">Subtítulo</option>
+                                                                <option value="9">Leyenda</option>
+                                                                <option value="10">Párrafo</option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="field-values">Opciones
                                                                 <span class="qs"><i class="fas fa-info-circle"></i>
-                                                                    <span class="custom-popover above">Las opciones son los diferentes valores que se pueden escoger y van separadas por comas</span>
+                                                                    <span class="custom-popover above">Las opciones son los diferentes valores que se pueden escoger, van separadas por comas</span>
                                                                 </span>
                                                             </label>
                                                             <input type="text" class="form-control" placeholder="" id="field-values" v-model="InputModel.values.string">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="field-points">Puntos
+                                                                <span class="qs"><i class="fas fa-info-circle"></i>
+                                                                    <span class="custom-popover above">El orden corresponderá al mismo de las opciones, van separados por comas</span>
+                                                                </span>
+                                                            </label>
+                                                            <input type="text" class="form-control" placeholder="" id="field-points" v-model="InputModel.points.string">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="required">Requerido
                                                                 <span class="qs"><i class="fas fa-info-circle"></i>
@@ -366,7 +404,7 @@ var Solicitudes = Vue.component('Solicitudes', {
                                                             <input type="checkbox" class="form-control required-field" placeholder="" id="required" v-model="InputModel.required">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="field-size">Tamaño
                                                                 <span class="qs"><i class="fas fa-info-circle"></i>
