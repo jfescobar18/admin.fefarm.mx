@@ -154,6 +154,7 @@ var Solicitudes = Vue.component('Solicitudes', {
             this.cleanInputModel();
         },
         editField: function (id) {
+            location.hash = '#edit-form';
             this.InputModel = this.RequestTemplate.filter(x => x.id === id)[0];
         },
         deleteField: function (id) {
@@ -350,7 +351,7 @@ var Solicitudes = Vue.component('Solicitudes', {
                                             </div>
 
                                             <div class="well col-md-12">
-                                                <div class="row">
+                                                <div class="row" id="edit-form">
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="field-label">Etiqueta</label>
