@@ -15,6 +15,7 @@ var Aplicaciones = Vue.component('Aplicaciones', {
                 response => {
                     this.Applications = response.body.map(function (x) {
                         x.Application_Date = new Date(x.Application_Date).toISOString().substr(0, 10);
+                        x.IdNumber = new Date(x.Application_Date).toISOString().substr(0, 10).split('-').join('') + x.Application_Id;
                         x.Application_PDF_Path = APIUrl() + x.Application_PDF_Path;
                         return x
                     });
@@ -66,6 +67,7 @@ var Aplicaciones = Vue.component('Aplicaciones', {
                                 <thead>
                                     <tr>
                                         <th>Id</th>
+                                        <th>Folio</th>
                                         <th>Nombre</th>
                                         <th>Email</th>
                                         <th>Teléfono Celular</th>
@@ -78,6 +80,7 @@ var Aplicaciones = Vue.component('Aplicaciones', {
                                 <tbody>
                                     <tr v-for="application in Applications">
                                         <td>{{ application.Application_Id }}</td>
+                                        <td>{{ application.IdNumber }}</td>
                                         <td>{{ application.Application_Applicant_Name }}</td>
                                         <td>{{ application.Application_Applicant_Email }}</td>
                                         <td>{{ application.Application_Applicant_Phone }}</td>

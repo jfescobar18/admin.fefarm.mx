@@ -85,6 +85,7 @@ var Solicitudes = Vue.component('Solicitudes', {
         },
         saveRequest: function () {
             showLoader();
+            
             this.$http.post(APIUrl() + `Requests/${this.RequestModel.Request_Id === 0 ? 'AddRequestTemplate' : 'UpdateRequestTemplate'}`, {
                 Request_Id: this.RequestModel.Request_Id,
                 Request_Name: this.RequestModel.Request_Name,
@@ -334,13 +335,13 @@ var Solicitudes = Vue.component('Solicitudes', {
                                                         
                                                         <textarea v-if="input.type === '6'" class="form-control" v-bind:id="'input-id-' + input.id" rows="10"></textarea>
                                                         
-                                                        <h3 v-if="input.type === '7'">{{ input.label }}</h3>
+                                                        <h3 v-bind:id="'input-id-' + input.id" v-if="input.type === '7'">{{ input.label }}</h3>
 
-                                                        <h4 v-if="input.type === '8'">{{ input.label }}</h4>
+                                                        <h4 v-bind:id="'input-id-' + input.id" v-if="input.type === '8'">{{ input.label }}</h4>
 
-                                                        <small v-if="input.type === '9'">{{ input.label }}</small>
+                                                        <small v-bind:id="'input-id-' + input.id" v-if="input.type === '9'">{{ input.label }}</small>
 
-                                                        <p v-if="input.type === '10'">{{ input.label }}</p>
+                                                        <p v-bind:id="'input-id-' + input.id" v-if="input.type === '10'">{{ input.label }}</p>
 
                                                         <div class="mt-5">
                                                             <button type="button" class="btn btn-sm btn-info" v-on:click="editField(input.id)"><i class="fas fa-edit"></i></button>
