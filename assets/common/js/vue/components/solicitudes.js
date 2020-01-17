@@ -85,7 +85,7 @@ var Solicitudes = Vue.component('Solicitudes', {
         },
         saveRequest: function () {
             showLoader();
-            
+
             this.$http.post(APIUrl() + `Requests/${this.RequestModel.Request_Id === 0 ? 'AddRequestTemplate' : 'UpdateRequestTemplate'}`, {
                 Request_Id: this.RequestModel.Request_Id,
                 Request_Name: this.RequestModel.Request_Name,

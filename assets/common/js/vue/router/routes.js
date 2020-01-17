@@ -5,6 +5,7 @@ import Aplicaciones from '../components/aplicaciones.js'
 import Reglamento from '../components/reglamento.js'
 import Evidencias from '../components/evidencias.js'
 import Requisitos from '../components/requisitos.js'
+import Noticias from '../components/noticias.js'
 
 const routes = [
     {
@@ -36,6 +37,11 @@ const routes = [
         path: '/Requisitos',
         name: 'Requisitos',
         component: Requisitos
+    },
+    {
+        path: '/Noticias',
+        name: 'Noticias',
+        component: Noticias
     }
 ];
 

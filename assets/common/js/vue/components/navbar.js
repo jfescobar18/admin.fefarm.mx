@@ -9,6 +9,7 @@ var navbar = Vue.component('navbar', {
                     <li><router-link to="/Reglamento"><i class="fas fa-file-pdf"></i></router-link></li>
                     <li><router-link to="/Evidencias"><i class="fas fa-file-pdf"></i></router-link></li>
                     <li><router-link to="/Requisitos"><i class="fas fa-file-pdf"></i></router-link></li>
+                    <li><router-link to="/Noticias"><i class="fas fa-file-pdf"></i></router-link></li>
             
                 </ul>
             </div>
@@ -20,6 +21,7 @@ var navbar = Vue.component('navbar', {
                     <li><router-link to="/Reglamento">Reglamento</router-link></li>
                     <li><router-link to="/Evidencias">Evidencias</router-link></li>
                     <li><router-link to="/Requisitos">Requisitos</router-link></li>
+                    <li><router-link to="/Noticias">Noticias</router-link></li>
                 </ul>
             </div>
         </div>
