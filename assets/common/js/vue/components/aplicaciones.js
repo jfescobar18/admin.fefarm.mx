@@ -7,12 +7,14 @@ var Aplicaciones = Vue.component('Aplicaciones', {
     methods: {
         loadApplications: function () {
             showLoader();
-            this.$http.get(APIUrl() + 'Application/GetApplications', {
+            this.$http.get(APIUrl() + 'Application/GetApplications/' + this.$route.params.Request_Id, {
                 headers: {
                     APIKey: config.APIKey
                 }
             }).then(
                 response => {
+                    console.log(response.body);
+
                     this.Applications = response.body.map(function (x) {
                         x.Application_Date = new Date(x.Application_Date).toISOString().substr(0, 10);
                         x.IdNumber = new Date(x.Application_Date).toISOString().substr(0, 10).split('-').join('') + x.Application_Id;
@@ -41,7 +43,31 @@ var Aplicaciones = Vue.component('Aplicaciones', {
                     link.setAttribute('download', response.body.filename);
                     document.body.appendChild(link);
                     link.click();
-                    
+
+                    hideLoader();
+                    document.body.removeChild(link);
+                },
+                err => {
+                    console.log(err);
+                    error_swal('Error...', 'Error interno estamos trabajando para solucionarlo');
+                    hideLoader();
+                }
+            );
+        },
+        downloadExcel: function (Application_Id) {
+            showLoader();
+            this.$http.get(APIUrl() + 'Application/GetApplicationsExcel', {
+                headers: {
+                    APIKey: config.APIKey
+                }
+            }).then(
+                response => {
+                    const link = document.createElement('a');
+                    link.href = APIUrl() + response.body.path;
+                    link.setAttribute('download', response.body.filename);
+                    document.body.appendChild(link);
+                    link.click();
+
                     hideLoader();
                     document.body.removeChild(link);
                 },
@@ -62,6 +88,9 @@ var Aplicaciones = Vue.component('Aplicaciones', {
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12">
+                        <div class="text-right table">
+                            <button v-on:click="downloadExcel" class="btn btn-success">Descargar Excel</button>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -90,11 +119,14 @@ var Aplicaciones = Vue.component('Aplicaciones', {
                                             <a class="btn btn-danger btn-sm" target="_blank" v-bind:href="application.Application_PDF_Path"><i class="fas fa-file-pdf"></i></a>
                                         </td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-success btn-sm" v-on:click="donwloadZIP(application.Application_Id)"><i class="fas fa-file-archive"></i></button>
+                                            <button type="button" class="btn btn-info btn-sm" v-on:click="donwloadZIP(application.Application_Id)"><i class="fas fa-file-archive"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div>
+                            <router-link class="btn btn-warning" to="/Lista"><i class="fas fa-arrow-left"></i> Voler</router-link>
                         </div>
                     </div>
                 </div>

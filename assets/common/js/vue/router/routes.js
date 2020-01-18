@@ -1,6 +1,7 @@
 import navbar from '../components/navbar.js'
 import home from '../components/home.js'
 import Solicitudes from '../components/solicitudes.js'
+import List from '../components/lista.js'
 import Aplicaciones from '../components/aplicaciones.js'
 import Reglamento from '../components/reglamento.js'
 import Evidencias from '../components/evidencias.js'
@@ -14,7 +15,12 @@ const routes = [
         component: home
     },
     {
-        path: '/Aplicaciones',
+        path: '/Lista',
+        name: 'List',
+        component: List
+    },
+    {
+        path: '/Aplicaciones/:Request_Id',
         name: 'Aplicaciones',
         component: Aplicaciones
     },
