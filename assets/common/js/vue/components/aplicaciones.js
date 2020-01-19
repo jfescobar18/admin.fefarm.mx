@@ -54,9 +54,9 @@ var Aplicaciones = Vue.component('Aplicaciones', {
                 }
             );
         },
-        downloadExcel: function (Application_Id) {
+        downloadExcel: function () {
             showLoader();
-            this.$http.get(APIUrl() + 'Application/GetApplicationsExcel', {
+            this.$http.get(APIUrl() + 'Application/GetApplicationsExcel/' + this.$route.params.Request_Id, {
                 headers: {
                     APIKey: config.APIKey
                 }
