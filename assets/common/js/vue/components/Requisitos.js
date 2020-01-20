@@ -21,7 +21,7 @@ var Requisitos = Vue.component('Requisitos', {
             showLoader();
             this.$http.get(APIUrl() + 'RequirementsPDF/GetPDFs', {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -47,7 +47,7 @@ var Requisitos = Vue.component('Requisitos', {
 
             this.$http.post(APIUrl() + 'RequirementsPDF/AddPDF', this.fileUploadFormData, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -73,7 +73,7 @@ var Requisitos = Vue.component('Requisitos', {
 
             this.$http.post(APIUrl() + 'RequirementsPDF/UpdatePDF', this.fileUploadFormData, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -96,7 +96,7 @@ var Requisitos = Vue.component('Requisitos', {
                 Requirements_PDF_Id: Requirements_PDF_Id
             }, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {

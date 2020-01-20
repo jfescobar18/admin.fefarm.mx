@@ -9,7 +9,7 @@ var List = Vue.component('List', {
             showLoader();
             this.$http.get(APIUrl() + 'Requests/GetRequestTemplates', {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {

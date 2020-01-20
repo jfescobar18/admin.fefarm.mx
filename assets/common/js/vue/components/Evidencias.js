@@ -21,7 +21,7 @@ var Evidencias = Vue.component('Evidencias', {
             showLoader();
             this.$http.get(APIUrl() + 'EvidencesPDF/GetPDFs', {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -47,7 +47,7 @@ var Evidencias = Vue.component('Evidencias', {
 
             this.$http.post(APIUrl() + 'EvidencesPDF/AddPDF', this.fileUploadFormData, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -73,7 +73,7 @@ var Evidencias = Vue.component('Evidencias', {
 
             this.$http.post(APIUrl() + 'EvidencesPDF/UpdatePDF', this.fileUploadFormData, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -96,7 +96,7 @@ var Evidencias = Vue.component('Evidencias', {
                 Evidences_PDF_Id: Evidences_PDF_Id
             }, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {

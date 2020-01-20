@@ -21,7 +21,7 @@ var Reglamento = Vue.component('Reglamento', {
             showLoader();
             this.$http.get(APIUrl() + 'RulesPDF/GetPDFs', {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -47,7 +47,7 @@ var Reglamento = Vue.component('Reglamento', {
 
             this.$http.post(APIUrl() + 'RulesPDF/AddPDF', this.fileUploadFormData, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -73,7 +73,7 @@ var Reglamento = Vue.component('Reglamento', {
 
             this.$http.post(APIUrl() + 'RulesPDF/UpdatePDF', this.fileUploadFormData, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -96,7 +96,7 @@ var Reglamento = Vue.component('Reglamento', {
                 Rules_PDF_Id: Rules_PDF_Id
             }, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {

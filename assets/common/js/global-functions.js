@@ -1,9 +1,9 @@
 function APIUrl() {
     if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') {
-        return config.LocalhostURL;
+        return window.config.LocalhostURL;
     }
     else {
-        return config.ProductionURL;
+        return window.config.ProductionURL;
     }
 }
 

@@ -9,7 +9,7 @@ var Aplicaciones = Vue.component('Aplicaciones', {
             showLoader();
             this.$http.get(APIUrl() + 'Application/GetApplications/' + this.$route.params.Request_Id, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -34,7 +34,7 @@ var Aplicaciones = Vue.component('Aplicaciones', {
             showLoader();
             this.$http.get(APIUrl() + 'Application/GetApplicationDocumentation/' + Application_Id, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -58,7 +58,7 @@ var Aplicaciones = Vue.component('Aplicaciones', {
             showLoader();
             this.$http.get(APIUrl() + 'Application/GetApplicationsExcel/' + this.$route.params.Request_Id, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {

@@ -21,7 +21,7 @@ var Noticias = Vue.component('Noticias', {
             showLoader();
             this.$http.get(APIUrl() + 'NewsPDF/GetPDFs', {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -47,7 +47,7 @@ var Noticias = Vue.component('Noticias', {
 
             this.$http.post(APIUrl() + 'NewsPDF/AddPDF', this.fileUploadFormData, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -73,7 +73,7 @@ var Noticias = Vue.component('Noticias', {
 
             this.$http.post(APIUrl() + 'NewsPDF/UpdatePDF', this.fileUploadFormData, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -96,7 +96,7 @@ var Noticias = Vue.component('Noticias', {
                 New_PDF_Id: New_PDF_Id
             }, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {

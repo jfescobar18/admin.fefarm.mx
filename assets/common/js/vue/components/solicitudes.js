@@ -61,7 +61,7 @@ var Solicitudes = Vue.component('Solicitudes', {
             showLoader();
             this.$http.get(APIUrl() + 'Requests/GetRequestTemplates', {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -96,7 +96,7 @@ var Solicitudes = Vue.component('Solicitudes', {
                 Request_Max_Beneficiaries: this.RequestModel.Request_Max_Beneficiaries
             }, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
@@ -129,7 +129,7 @@ var Solicitudes = Vue.component('Solicitudes', {
                 Request_Id: Request_Id
             }, {
                 headers: {
-                    APIKey: config.APIKey
+                    APIKey: window.config.APIKey
                 }
             }).then(
                 response => {
