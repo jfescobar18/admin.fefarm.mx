@@ -1,12 +1,12 @@
-import navbar from '../components/navbar.js?n=1'
-import home from '../components/home.js?n=1'
-import Solicitudes from '../components/solicitudes.js?n=1'
-import List from '../components/lista.js?n=1'
-import Aplicaciones from '../components/aplicaciones.js?n=1'
-import Reglamento from '../components/reglamento.js?n=1'
-import Evidencias from '../components/evidencias.js?n=1'
-import Requisitos from '../components/requisitos.js?n=1'
-import Noticias from '../components/noticias.js?n=1'
+import navbar from '../components/navbar.js?n=1.1'
+import home from '../components/home.js?n=1.1'
+import Solicitudes from '../components/solicitudes.js?n=1.1'
+import List from '../components/lista.js?n=1.1'
+import Aplicaciones from '../components/aplicaciones.js?n=1.1'
+import Reglamento from '../components/reglamento.js?n=1.1'
+import Evidencias from '../components/evidencias.js?n=1.1'
+import Requisitos from '../components/requisitos.js?n=1.1'
+import Noticias from '../components/noticias.js?n=1.1'
 
 const routes = [
     {
