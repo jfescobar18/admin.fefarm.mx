@@ -22,6 +22,8 @@ function animInput() {
 }
 
 function formatDate(date) {
+    date = new Date(date.getTime() + Math.abs(date.getTimezoneOffset() * 60000));
+
     var monthNames = [
         "ENE", "FEB", "MAR",
         "ABR", "MAY", "JUN", "JUL",
