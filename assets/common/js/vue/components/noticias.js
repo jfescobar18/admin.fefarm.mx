@@ -89,7 +89,7 @@ var Noticias = Vue.component('Noticias', {
                 }
             );
         },
-        deletePDF: function (News_PDF_Id) {
+        deletePDF: function (New_PDF_Id) {
             showLoader();
 
             this.$http.post(APIUrl() + 'NewsPDF/DeletePDF', {
@@ -153,7 +153,7 @@ var Noticias = Vue.component('Noticias', {
                         </div>
                         <div class="form-group col-md-6 col-md-offset-3 text-center">
                             <input type="submit" class="btn btn-info" value="Guardar">
-                            <button v-on:click="deletePDF(pdf.News_PDF_Id)" class="btn btn-danger">Eliminar</button>
+                            <button v-on:click="deletePDF(pdf.New_PDF_Id)" class="btn btn-danger">Eliminar</button>
                         </div>
                     </div>
                 </form>
